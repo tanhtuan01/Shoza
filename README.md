@@ -16,10 +16,34 @@ Chức năng:
   - Quản lý người dùng: cấp quyền
   - Thống kê (theo ngày, tìm theo ngày)
   - Góp ý
-  - Khác: thay đổi sản phẩm hiển thị, slide, 
+  - Khác: thay đổi sản phẩm hiển thị, slide,
+  - Người dùng xem sản phẩm đã mua, chờ, hủy
+
+Một số hình ảnh
+
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/33f1c186-1499-4e56-99da-efb765aeee2d)
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/0f580bc3-59ee-469e-87cb-6292a0401a14)
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/7c88bec8-dd27-4b27-b4c7-f228cfbffc45)
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/e3f54f9b-1f40-415d-b406-0548201ff87d)
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/88d919a0-1ce9-4478-a9cb-2041049dedce) ![image](https://github.com/tanhtuan01/Shoza/assets/58209760/b629ee6e-0bab-4742-ac90-27e26e325453)
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/1093c73f-b895-468b-9df5-612feb387027)
+
+
+
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/974ddcf1-7a3d-438b-9f7b-0b53a5db3278)
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/95a93d6d-b925-479f-aa3b-bb76eafbaa7d)
+
+
+
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/d608957e-de3a-4226-8eaf-c39a7cd357d5)
 
 Tài khoản Admin:
   20111061164@hunre.edu.vn
   shozaadmin
-![image](https://github.com/tanhtuan01/Shoza/assets/58209760/565279a2-3f9d-4cca-b1bd-d3170a10a128)
-![image](https://github.com/tanhtuan01/Shoza/assets/58209760/af19e12e-6c59-4b9c-857c-2f3436d8f8dc)
+
+Thông tin thẻ
+  Ngân hàng: NCB
+  Số thẻ: 9704198526191432198
+  Tên chủ thẻ:NGUYEN VAN A
+  Ngày phát hành:07/15
+  Mật khẩu OTP:123456
