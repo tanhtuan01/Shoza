@@ -1,5 +1,7 @@
 package com.tat.shoza.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,6 +98,7 @@ public class PaymentResultController {
 			Order order = new Order();
 			Long savedId = null;
 			// new oder
+			LocalDateTime localDateTime = LocalDateTime.now();
 			if(infoDTO.length == 1) {
 				order.setOrderUserName(infoDTO[0].getName());
 				order.setOrderPhone(infoDTO[0].getPhone());
@@ -107,6 +110,7 @@ public class PaymentResultController {
 				order.setPayment(paymentService.get((long)2));
 				order.setBankCode(vnp_BankCode);
 				order.setOrderStatus(5);
+				order.setOrderStatusAt(localDateTime.now()+"");
 				savedId = orderService.saveAndGetId(order);
 			}
 			System.err.println("_____________________");

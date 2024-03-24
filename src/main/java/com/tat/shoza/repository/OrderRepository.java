@@ -39,7 +39,7 @@ public interface OrderRepository extends JpaRepository<Order, Long>{
 	@Query("select o from Order o where o.orderStatus = 3 AND DAY(o.orderStatusAt) = :day AND MONTH(o.orderStatusAt) = :month AND YEAR(o.orderStatusAt) = :year")
 	Page<Order> pageListOrderSuccessDate(@Param("day")int day, @Param("month")int month, @Param("year") int year, Pageable pageable);
 
-	@Query("select sum(o.orderTotalPrice) from Order o where o.orderStatus = 3 AND DAY(o.orderStatusAt) = :day AND MONTH(o.orderStatusAt) = :month AND YEAR(o.orderStatusAt) = :year")
+	@Query("select sum(o.orderTotalPrice) from Order o where o.orderStatus = 3 OR o.orderStatus = 5 OR o.orderStatus = 6 AND DAY(o.orderStatusAt) = :day AND MONTH(o.orderStatusAt) = :month AND YEAR(o.orderStatusAt) = :year")
 	Long orderTotalPriceSuccessToday(@Param("day")int day, @Param("month")int month, @Param("year") int year);
 	
 	@Query("select o from Order o where o.orderStatus = 4 AND DAY(o.orderStatusAt) = :day AND MONTH(o.orderStatusAt) = :month AND YEAR(o.orderStatusAt) = :year")
