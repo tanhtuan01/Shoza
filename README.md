@@ -32,7 +32,10 @@ Một số hình ảnh
 
 ![image](https://github.com/tanhtuan01/Shoza/assets/58209760/974ddcf1-7a3d-438b-9f7b-0b53a5db3278)
 ![image](https://github.com/tanhtuan01/Shoza/assets/58209760/95a93d6d-b925-479f-aa3b-bb76eafbaa7d)
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/bc4fa7db-b943-4e94-8327-eefdccc41cb3)
 
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/80cad648-8cc4-4d1a-926e-5d015654ddd8)
+![image](https://github.com/tanhtuan01/Shoza/assets/58209760/1262e498-4bfc-44e6-bae1-79eb2a4795ae)
 
 
 ![image](https://github.com/tanhtuan01/Shoza/assets/58209760/d608957e-de3a-4226-8eaf-c39a7cd357d5)
