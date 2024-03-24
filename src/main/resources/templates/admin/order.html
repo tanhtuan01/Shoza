@@ -1,0 +1,88 @@
+
+<div class="home-to">
+	<span><a th:href="@{/admin}">Trang Chủ</a> > <a href="#!">Đơn
+			Hàng</a> > <a href="#!">Danh Sách</a></span>
+</div>
+<div class="shz-header-title">danh sách đơn hàng</div>
+<div>
+	<div class="order-option">
+		<ul>
+			<li><a th:href="@{/admin/listOrder}">Toàn bộ</a></li>
+			<li><a th:href="@{/admin/order?stt=today}">Hôm nay</a></li>
+			<li><a th:href="@{/admin/order?stt=cxn}">Chưa xác nhận</a></li>
+			<li><a th:href="@{/admin/order?stt=tt}">Đã thanh toán(chưa giao)</a></li>
+			<li><a th:href="@{/admin/order?stt=shipping}">Đang giao</a></li>
+		</ul>
+	</div>
+	<div class="order-option form">
+	<span>Tìm theo thời gian</span>
+		<form th:action="@{/admin/order}" method="get">
+		<input type="hidden" name="stt" value="date">
+			<select name="day" id="day"></select>
+			<select name="month" id="month"></select>
+			<select name="year" id="year"></select>
+			
+			<input type="submit" class="btn">
+		</form>
+		
+	</div>
+	<table id="orders" cellspacing="0">
+		<thead>
+			<tr>
+				<th id="stt">#</th>
+				<th id="name">Người nhận</th>
+				<th id="phone">Số điện thoại</th>
+				<th id="address">Địa chỉ</th>
+				<th id="price">Số tiền</th>
+				<th id="status">Trạng thái</th>
+				<th id="update">Cập nhật</th>
+				<th id="view">Chi Tiết</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td id="empty" colspan="8"></td>
+			</tr>
+			<tr th:each="o, i : ${order}">
+				<td th:text="${i.count}"></td>
+				<td th:text="${o.orderUserName}">Người nhận</td>
+				<td th:text="${o.orderPhone}">Số điện tdoại</td>
+				<td th:text="${o.orderAddess}">Địa chỉ</td>
+				<td
+					th:text="${#numbers.formatDecimal(o.orderTotalPrice, 1, 'POINT', 0, 'POINT') + ' đ'}">Số
+					tiền</td>
+				<td><select name="" id="orderStatus">
+						<option th:selected="${o.orderStatus == 0}" value="0" th:disabled="${o.orderStatus==3 || o.orderStatus==4 || o.orderStatus==5}">Chưa
+							xác nhận</option>
+						<option th:selected="${o.orderStatus == 1}" value="1" th:disabled="${o.orderStatus==3 || o.orderStatus==4 || o.orderStatus==4}">Đang
+							chuyển giao cho vận chuyển</option>
+						<option th:selected="${o.orderStatus == 2}" value="2" th:disabled="${o.orderStatus==3 || o.orderStatus==4 || o.orderStatus==4}">Đang
+							vận chuyển</option>
+						<option class="order-success" th:selected="${o.orderStatus == 3}"
+							th:value="3" th:disabled="${o.orderStatus==3 || o.orderStatus==5 || o.orderStatus==6 || o.orderStatus==4}">Giao thành công</option>
+						<option th:selected="${o.orderStatus == 4}" value="4" th:disabled="${o.orderStatus==3 || o.orderStatus==4 || o.orderStatus==4}">Giao
+							thất bại</option>
+						<option th:selected="${o.orderStatus == 5}" value="5" th:disabled="${o.orderStatus==3 || o.orderStatus==4 || o.orderStatus==4}">
+							Đã thanh toán-chưa nhận hàng</option>
+						<option th:selected="${o.orderStatus == 6}" value="6" th:disabled="${o.orderStatus==3 || o.orderStatus==4 || o.orderStatus==6}">
+							Đã nhận hàng</option>
+				</select></td>
+				<td><a href="#!" th:class="${o.orderStatus == 3 ||o.orderStatus == 6} ? 'hide' : ''" th:onclick="'updateOrderStatus(this,'+${o.id}+')'"> <i class="fa-solid fa-repeat"></i>
+				</a></td>
+				<td><a href="#!view" th:onclick="'openOrderDetail('+${o.id}+')'"> <i class="fa-solid fa-circle-info"></i>
+				</a></td>
+			</tr>
+
+		</tbody>
+
+	</table>
+</div>
+
+<div class="page">
+	<ul class="order-page">
+		<li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}" th:unless="${pageNumber == 0}"><a
+			th:href="${pageNumber == page} ? '#!' : @{'/admin/order' + '?page=' + ${pageNumber}}"
+			th:text="${pageNumber}"
+			th:class="${pageNumber == page} ? 'page-active' : ''"></a></li>
+	</ul>
+</div>

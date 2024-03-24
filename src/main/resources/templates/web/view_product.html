@@ -1,0 +1,103 @@
+<div class="shz-category-product">
+	<div class="shz-product-content r-content">
+		<div class="home-to">
+			<span><a href="/">Trang Chủ</a> > <a href="#">Danh Mục</a> > <a
+				href="#">Sản Phẩm</a> > <a href="#!"
+				th:text="${product.productName}"></a> </span>
+		</div>
+		<div class="shz-category">
+			<div class="category-product-content">
+				<div class="content-product">
+					<div class="view-product r-content">
+						<div class="v-left img-zoom-container">
+
+							<img id="productViewImage"
+								th:src="'/img/web/product/' + ${product.productImage}" alt="">
+							<div id="ZoomImage" class="img-zoom-result"></div>
+
+							<div class="v-list-img">
+								<div class="v-item">
+									<img th:src="'/img/web/product/' + ${product.productImage}"
+										alt="" onclick="changeSubImg(this)">
+								</div>
+								<div class="v-item" th:each="i : ${listImg}">
+									<img onclick="changeSubImg(this)"
+										th:src="'/img/web/product/' + ${i.productImage}" alt="">
+								</div>
+							</div>
+						</div>
+						<div class="v-right">
+							<div class="v-title">
+								<h1 th:text="${product.productName}"></h1>
+							</div>
+							<div class="v-price">
+								<h1
+									th:text="${#numbers.formatDecimal(product.productCurrentPrice, 1, 'POINT', 0, 'POINT')} + 'đ'">999999</h1>
+							</div>
+
+							<div class="v-discount">
+								<span><del
+										th:text="${#numbers.formatDecimal(product.productOldPrice, 1, 'POINT', 0, 'POINT')} + 'đ'">9999</del></span>
+								<span class="percent"
+									th:text="'-' + ${product.productDiscount} + '%'">-45%</span>
+							</div>
+							<div class="v-quantity">
+
+								<span>Số lượng <a onclick="lowQuantity()">-</a> <input
+									onchange="checkInputQuantity(this)" min="1" type="number"
+									value="1" id="InInputQuantity"
+									th:attr="data-max=${product.productQuantity}"> <a
+									onclick="upQuantity()" href="#!">+</a>
+								</span>
+							</div>
+							<a href="#AboutDescription">Mô tả</a>
+							<div class="v-btn">
+								<a style="display:none;" href="" class="btn-buy-now a-btn">Mua ngay</a> 
+								<a
+									th:href="@{/shoza/addToCart}"
+									th:onclick="'btnAddToCart(event,' + ${product.id} + ')'"
+									class="btn-add-to-cart a-btn">Thêm vào giỏ hàng</a>
+
+							</div>
+						</div>
+					</div>
+					<div id="FullDescription">
+
+						<div class="r-content" id="innerDescription">
+							<textarea id="productDescription"
+								th:text="${product.productDescription}"></textarea>
+						</div>
+					</div>
+
+					<div id="comment">
+						<div class="comment-title">Bình Luận</div>
+						<p class="comment-for">
+							Nhận xét & đánh giá về: <span th:text="${product.productName}"></span>
+						</p>
+						<div class="comment-item" th:class="${user != null && sizeCmt > 0 ? '' : 'hide'}">
+							<form th:action="@{/shoza/comment/save}" method="post">
+								<input type="hidden" th:value="${product.id}" name="product-id">
+								<div class="comment-content">
+									<textarea name="comment-content"></textarea>
+								</div>
+								<div class="comment-content">
+									<button type="submit" disabled>Gửi</button>
+								</div>
+							</form>
+						</div>
+						<div class="comment-item" th:each="c : ${listCmt}">
+							<div class="comment-user-time">
+								<div class="comment-user" th:text="${c.user.userName}">Nguyễn
+									Văn A</div>
+								<div class="comment-time" th:text="${c.createdAt}">2024-12-12</div>
+							</div>
+							<div class="comment-content" th:text="${c.content}">Sản
+								phẩm đẹp, chất lượng</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

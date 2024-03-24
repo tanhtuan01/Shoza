@@ -1,0 +1,34 @@
+<div class="shz-profile">
+	<div class="profile-content r-content">
+		<div class="profile-body" style="">
+			<div class="pc-left" style="width: 30%">
+				<ul>
+					<li style="background: orange;color:white"><a href="#" style="color:white">Tài khoản</a></li>
+					<li><a style="color:black" th:href="@{/user/bought}">Đơn hàng đã mua</a></li>
+					<li><a style="color:black" th:href="@{/user/order-wait}">Đơn hàng đang chờ</a></li>
+					<li><a style="color:black" th:href="@{/user/order-cancel}">Đơn hàng đã hủy</a></li>
+				</ul>
+			</div>
+			<div class="pc-right">
+			<p th:text="${mess != null} ? ${mess} : ''" th:class="${mess!=null} ? 'pc-sc' : ''"></p>
+				<form th:object="${user}" method="post" th:action="@{/user/profile}">
+					<div class="pc-row">
+						<div>Tên tài khoản</div>
+						<div><input type="text" th:field="*{userName}" th:value="${user.userName}"></div>
+					</div>
+					<div class="pc-row">
+						<div>Email / Số điện thoại</div>
+						<div><input type="text" th:field="*{email}" th:value="${user.email}"></div>
+					</div>
+					<div class="pc-row">
+						<div>Mật khẩu</div>
+						<div><input type="password" name="pass" placeholder="Mật khẩu mới"></div>
+					</div>
+					<div class="pc-row">
+						<div><input class="btn" type="submit" value="Lưu thông tin"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

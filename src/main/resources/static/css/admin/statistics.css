@@ -1,0 +1,83 @@
+.statistics table caption{
+	padding: 10px;
+	background: white;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+
+.statistics table .price{
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.statistics-page{
+	background: white;
+}
+
+.statistics table tr{
+font-size: 16px;
+}
+
+.statistics table thead tr th{
+	padding: 10px 0;
+	
+}
+.statistics table tbody tr td{
+	padding: 5px 0;
+}
+.statistics table tbody tr:nth-child(odd) {
+	background: #f6f3f3;
+}
+
+.statistics-product .statistics-row{
+	display: flex;
+	flex-wrap: wrap;
+	background: white;
+}
+
+.statistics-product-item{
+	flex-basis: calc(100% / 4);
+	padding: 5px;
+	display: flex;
+	position: relative;
+}
+
+.statistics-product-item .item-img{
+	width: 40%;
+}
+
+.statistics-product-item .item-info{
+	width: 60%;
+	font-size: 14px;
+	padding: 0 0 0 5px;
+
+}
+
+.statistics-product-item .item-info p.name{
+	display: -webkit-box;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.statistics-product-item .item-info p.sold{
+	padding: 5px 0;
+}
+
+.statistics-product-item .item-info p.sold span{
+	font-weight: bold;
+}
+
+.statistics-product-item .item-info p a{
+	position: absolute;
+	bottom: 0;
+	right:0;
+	margin: 10px;
+}
+
+.statistics-product-item img{
+	width: 100%;
+	height: 150px;
+	border-radius: 5px;
+}

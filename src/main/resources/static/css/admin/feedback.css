@@ -1,0 +1,83 @@
+#feedbackTable thead tr th{
+	padding: 10px 5px;
+	border-bottom: 1px solid #eee;
+}
+
+#feedbackTable thead tr th:nth-child(1), #feedbackTable thead tr th:nth-child(4){
+	width: 5%;
+}
+
+#feedbackTable thead tr th:nth-child(2){
+	width: 75%;
+}
+
+#feedbackTable thead tr th:nth-child(3){
+	width: 15%;
+}
+
+#feedbackTable tbody tr td{
+	padding: 10px 5px;
+	line-height: 22px;
+	border-bottom: 1px solid #eee;
+}	
+#feedbackTable tbody tr td:nth-child(2) {
+	display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Số dòng tối đa */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#feedbackTable tbody tr.seen, #feedbackTable tbody tr.seen a{
+	color: #9f9e9e;
+}
+
+.shoza-admin-feedback{
+	min-height: 500px;
+	background: white;
+}
+
+.feedback-content, .order-detail-content{
+	width: 50%;
+	margin: auto;
+	height: 50%;
+	position: relative;
+	transform: translate(0%, 50%)
+}
+
+.feedback-button, .order-detail-button{
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 10px 0;
+}
+.menu-feedback{
+	padding: 10px 20px;
+	background: white;
+}
+.menu-feedback ul li{
+	display: inline-block;
+	border-right: 1px solid #ccc;
+	padding: 5px 10px 0 0;
+}
+
+.menu-feedback ul li a{
+	font-size: 14px;
+}
+
+#dialogOverlay .detail-item {
+	display: flex; 
+	padding: 5px 10px;
+	border-bottom: 1px solid #ebe5e5;
+}
+#dialogOverlay .detail-item .detail-left img{
+	width: 70px;
+	height: 70px;
+}
+
+#dialogOverlay .detail-item .detail-right p{
+	font-size: 14px;
+	padding: 0 10px 5px;
+	text-align: left;
+}

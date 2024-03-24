@@ -1,0 +1,18 @@
+<div class="shz-header-title">Bài Viết - Giới Thiệu&nbsp;&nbsp;<a th:href="@{/admin/web-info/article/edit-introduce}">Sửa</a></div>
+
+
+<div th:text="${article_introduce}" id="articleIntroduceContent"></div>
+
+<div id="articleIntroduce"></div>
+
+<script type="text/javascript">
+
+	var articleIntroduceContent = document.getElementById("articleIntroduceContent").innerText
+	
+	var articleIntroduce = document.getElementById("articleIntroduce")
+	
+	articleIntroduce.innerHTML = articleIntroduceContent
+	
+	document.getElementById("articleIntroduceContent").style.display = "none" 
+
+</script>

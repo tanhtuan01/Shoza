@@ -1,0 +1,151 @@
+.top-bar-option {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 20px;
+	background: white
+}
+
+.option-sort-by, .category-product-content {
+	display: flex;
+}
+
+.option-sort-by .option-sort {
+	margin: 0 5px;
+	padding: 5px 0;
+}
+
+.option-sort-by .option-sort:hover {
+	/*     background: linear-gradient(to right,rgb(128 104 130),rgb(139 158 98)); */
+	box-shadow: 1px 1px 8px 1px silver;
+}
+
+.option-sort-by .option-sort a {
+	color: var(--color-orange);
+	text-transform: uppercase;
+	font-weight: 500;
+}
+
+.category-product-content {
+	margin-top: 10px;
+}
+
+.category-product-content .content-category {
+	flex-grow: 1;
+	background: white;
+	overflow: hidden;
+	max-width: 200px;
+	min-width: calc(( 100%/ 6)- 5px);
+	height: fit-content;
+	width: 100%;
+}
+
+.category-product-content .content-product {
+	flex-grow: 5;
+}
+
+.content-category ul {
+	width: 100%;
+}
+
+.content-category ul li {
+	padding: 10px 8px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.content-category ul li:hover {
+	background: linear-gradient(to right, rgb(128, 104, 130),
+		rgb(139, 158, 98));
+}
+
+.content-category ul li:hover a {
+	font-weight: 700;
+	color: white;
+}
+
+.content-category ul li a {
+	width: 100%;
+	font-size: var(--text-size14);
+	position: relative;
+}
+
+.content-product {
+	margin-left: 10px;
+}
+
+.content-product.product-by-category .product-list a{
+	box-sizing: border-box;
+	flex-basis: calc(( 98%/ 5) - 5px);
+	min-width: calc(( 98%/ 5) - 5px);
+	margin-bottom: 15px;
+}
+
+.content-left-price {
+	padding: 10px 5px;
+}
+
+.content-left-price .left-price-title {
+	font-size: 16px;
+	color: var(--color-text);
+	padding: 0 0 5px;
+}
+
+.content-left-price form {
+	display: flex;
+	justify-content: space-between;
+}
+
+.content-left-price input {
+	padding: 8px 5px;
+	margin-bottom: 5px;
+	width: 100%;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	font-size: 13px;
+}
+
+.content-left-price button {
+	width: 40px;
+	height: 35px;
+	border: none;
+	border-radius: 5px;
+	outline: none;
+	background: var(--color-orange);
+	background-size: 22px;
+	cursor: pointer;
+	color: white;
+	margin-left: 5px;
+}
+
+.content-left-price form div:last-child {
+	display: flex;
+	align-items: center;
+}
+
+.space {
+	height: 10px;
+	background: var(--bg-silver);
+}
+
+.page {
+	display: flex;
+	justify-content: center;
+}
+
+.page ul li {
+	list-style-type: none;
+	display: inline-block;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 10px;	
+	
+}
+
+.page ul li a {
+	color: black;
+	display: block;
+	padding: 10px 15px;
+}
+
+.page ul li a.page-active{
+	background: linear-gradient(to right,rgb(128 104 130),rgb(139 158 98));
+	border-radius: 10px;
+	color: white;
+}

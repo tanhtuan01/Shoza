@@ -1,0 +1,52 @@
+<div class="home-to">
+	<span><a th:href="@{/admin}">Trang Chủ</a> > <a
+		th:href="@{/admin/product}">Danh Sách Sản Phẩm</a></span>
+	<p style="margin-top: 10px">
+		<a th:href="@{/admin/product/add}" class="btn">Thêm Mới</a>
+	</p>
+</div>
+<div class="table">
+	<table class="category-table" style="" id="productTable">
+		<thead style="text-align: left">
+			<tr>
+
+				<th>#</th>
+				<th>IMG</th>
+				<th>Tên sản phẩm</th>
+				<th>Giá Cũ</th>
+				<th>Giảm</th>
+				<th>Giá Bán</th>
+				<th>Số lượng</th>
+				<th>Đã bán</th>
+				<th>Xem</th>
+				<th>Sửa</th>
+				<th>Xóa</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p, i : ${list}">
+
+				<td th:text="${i.count}"></td>
+				<td class="hinhanh"><img
+					th:src="'/img/web/product/' + ${p.productImage}"
+					alt=""></td>
+				<td th:text="${p.productName}"></td>
+				<td th:text="${#numbers.formatDecimal(p.productOldPrice, 1, 'POINT', 0, 'POINT')} + 'đ'"></td>
+				<td th:text="${p.productDiscount}"></td>
+				<td th:text="${#numbers.formatDecimal(p.productCurrentPrice, 1, 'POINT', 0, 'POINT')} + 'đ'"></td>
+				<td th:text="${#numbers.formatDecimal(p.productQuantity, 1, 'POINT', 0, 'POINT')}"></td>
+				<td th:text="${#numbers.formatDecimal(p.productSold, 1, 'POINT', 0, 'POINT')}"></td>
+				<td><a th:href="@{'/admin/product/preview/'+${p.id}}"> <i class="fa-regular fa-eye"></i>
+				</a></td>
+				<td><a th:href="@{'/admin/product/edit?id='+${p.id}}"> <i
+						class="fa-solid fa-pen-to-square"></i>
+				</a></td>
+				<td><a th:href="@{'/admin/product/delete/' + ${p.id}}" th:attr="data-id=${p.id}, data-name=${p.productName}" onclick="showConfirmationDialog(event)"> 
+					<i class="fa-solid fa-trash"></i>
+				</a></td>
+			</tr>
+
+		</tbody>
+
+	</table>
+</div>

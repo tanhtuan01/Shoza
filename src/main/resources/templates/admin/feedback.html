@@ -1,0 +1,42 @@
+<div class="shz-header-title">Tất cả góp ý</div>
+<div class="menu-feedback">
+	<ul>
+		<li><a th:href="@{/admin/feedback?act=all}">Toàn bộ</a> </li>
+		<li><a th:href="@{/admin/feedback?act=today}">Hôm nay</a> </li>
+		<li><a th:href="@{/admin/feedback?act=unread}">Chưa đọc</a> </li>
+		<li><a th:href="@{/admin/feedback/read-all}">Đọc toàn bộ</a> </li>
+	</ul>
+</div>
+<div class="shoza-admin-feedback">
+
+	<table id="feedbackTable" >
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Nội dung</th>
+				<th>Thời gian </th>
+				<th>Xem</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="f, i : ${list}" th:class="${f.classList()}">
+				<td th:text="${i.count}">1</td>
+				<td class="content" th:text="${f.content}">Nội dung</td>
+				<td th:text="${f.createdAt}">2024-02-29 21:34:04</td>
+				<td>
+					<a href="#view" th:onclick="'viewFeedback(this,'+${f.id}+')'"><i class="fa-solid fa-envelope-open"></i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
+
+<div class="page">
+	<ul class="order-page">
+		<li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}" th:unless="${pageNumber == 0}"><a
+			th:href="${pageNumber == page} ? '#!' : @{'/admin/feedback' + '?page=' + ${pageNumber} + '&act=' + ${act}}"
+			th:text="${pageNumber}"
+			th:class="${pageNumber == page} ? 'page-active' : ''"></a></li>
+	</ul>
+</div>

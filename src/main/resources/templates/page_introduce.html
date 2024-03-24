@@ -1,0 +1,15 @@
+<div th:text="${article_introduce}" id="articleIntroduceContent"></div>
+
+<div id="articleIntroduce" class="r-content" style="background: white; padding: 30px;"></div>
+
+<script type="text/javascript">
+
+	var articleIntroduceContent = document.getElementById("articleIntroduceContent").innerText
+	
+	var articleIntroduce = document.getElementById("articleIntroduce")
+	
+	articleIntroduce.innerHTML = articleIntroduceContent
+	
+	document.getElementById("articleIntroduceContent").style.display = "none" 
+
+</script>

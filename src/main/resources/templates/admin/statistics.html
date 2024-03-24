@@ -1,0 +1,155 @@
+<div class="shz-header-title">Thống kê</div>
+
+<div class="shz-header-medium-title">
+	Tổng doanh thu: &nbsp;<span
+		th:text="${#numbers.formatDecimal(sumrevenue, 1, 'POINT', 0, 'POINT')} + 'đ'"></span>
+</div>
+
+<div class="statistics" th:class="${#lists.size(orders) > 0} ? 'statistics' : 'hide'">
+	<table>
+		<caption>
+			Đơn hàng thành công hôm nay: <span
+				th:text="${price != null} ? ${#numbers.formatDecimal(price, 1, 'POINT', 0, 'POINT')} + 'đ' : '0đ'"></span>
+		</caption>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Số tiền</th>
+				<th>Mã đơn hàng</th>
+
+				<th>Người nhận</th>
+				<th>Địa chỉ</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="s,i : ${orders}">
+				<td th:text="${i.count}"></td>
+				<td class="price"
+					th:text="'+ '+${#numbers.formatDecimal(s.orderTotalPrice, 1, 'POINT', 0, 'POINT')} + 'đ'"></td>
+				<td th:text="${s.orderCode}"></td>
+
+				<td th:text="${s.orderUserName}"></td>
+				<td th:text="${s.orderAddess}"></td>
+				<td><a href="#" th:onclick="'openOrderDetail('+${s.id}+')'">Chi
+						tiết</</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div th:class="${#lists.size(orders) > 0} ? 'statistics-page' : 'hide'" th:unless="${orders.isEmpty()}">
+	<ul class="order-page">
+		<li th:each="pageNumber : ${#numbers.sequence(1, totalPagesOrder)}"><a
+			th:href="${pageNumber == pageOrder} ? '#!' : @{'/admin/statistics?act=' + ${act} + '&pageOrder=' + ${pageNumber}}"
+			th:text="${pageNumber}"
+			th:class="${pageNumber == pageOrder} ? 'page-active' : ''"></a></li>
+	</ul>
+</div>
+
+
+
+<div class="statistics" >
+	<table>
+		<caption>
+			Đơn hàng bị hủy
+		</caption>
+		<thead >
+			<tr>
+				<th>#</th>
+				<th>Số tiền</th>
+				<th>Mã đơn hàng</th>
+				<th>Người nhận</th>
+				<th>Địa chỉ</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody >
+			<tr th:each="s,i : ${ordersFail}">
+				<td th:text="${i.count}"></td>
+				<td class="price"
+					th:text="${#numbers.formatDecimal(s.orderTotalPrice, 1, 'POINT', 0, 'POINT')} + 'đ'"></td>
+				<td th:text="${s.orderCode}"></td>
+
+				<td th:text="${s.orderUserName}"></td>
+				<td th:text="${s.orderAddess}"></td>
+				<td><a href="#" th:onclick="'openOrderDetail('+${s.id}+')'">Chi
+						tiết</</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="statistics-page" th:unless="${ordersFail.isEmpty()}">
+	<ul class="order-page">
+		<li th:each="pageNumber : ${#numbers.sequence(1, totalOrderFail)}"><a
+			th:href="${pageNumber == pof} ? '#!' : @{'/admin/statistics?' + 'pof=' + ${pageNumber}}"
+			th:text="${pageNumber}"
+			th:class="${pageNumber == pof} ? 'page-active' : ''"></a></li>
+	</ul>
+</div>
+
+
+
+<div class="shz-header-medium-title">
+	Tổng Sản phẩm Đã bán: &nbsp;<span
+		th:text="${#numbers.formatDecimal(cproductsold, 1, 'POINT', 0, 'POINT')}"></span>
+</div>
+
+<div class="shz-header-medium-title">
+	Số Sản phẩm Đã bán Hôm Nay: &nbsp;<span
+		th:text="${#numbers.formatDecimal(cproductsoldtoday, 1, 'POINT', 0, 'POINT')}"></span>
+</div>
+
+<div class="statistics-product" th:unless="${orderDetails.isEmpty()}">
+
+	<div class="statistics-row">
+		<div class="statistics-product-item" th:each="ps: ${orderDetails}">
+			<div class="item-img">
+				<img th:src="@{'/img/web/product/' + ${ps.product.productImage}}">
+			</div>
+			<div class="item-info">
+				<p class="name" th:text="${ps.product.productName}"></p>
+				<p class="sold">Số lượng bán: <span th:text="${ps.quantity}"></span></p>
+				<p> <a th:href="@{'/admin/product/preview/' + ${ps.product.id}}" class="btn">Xem</a> </p>
+			</div>
+		</div>
+		
+	</div>
+
+</div>
+<div th:class="${#lists.size(orderDetails) > 0} ? 'statistics-page' : 'hide'" th:unless="${orderDetails.isEmpty()}">
+	<ul class="order-page">
+		<li th:each="pageNumber : ${#numbers.sequence(1, totalPagesProduct)}"><a
+			th:href="${pageNumber == pageProduct} ? '#!' : @{'/admin/statistics'  + '?pageProduct=' + ${pageNumber}}"
+			th:text="${pageNumber}"
+			th:class="${pageNumber == pageProduct} ? 'page-active' : ''"></a></li>
+	</ul>
+</div>
+
+
+<div class="shz-header-medium-title">Sản phẩm được mua nhiều nhất</div>
+<div class="statistics-product">
+
+	<div class="statistics-row">
+		<div class="statistics-product-item" th:each="p: ${topProduct}">
+			<div class="item-img">
+				<img th:src="@{'/img/web/product/' + ${p.productImage}}">
+			</div>
+			<div class="item-info">
+				<p class="name" th:text="${p.productName}"></p>
+				<p class="sold">Đã bán: <span th:text="${p.productSold}"></span></p>
+				<p> <a th:href="@{'/admin/product/preview/' + ${p.id}}" class="btn">Xem</a> </p>
+			</div>
+		</div>
+		
+	</div>
+
+</div>
+
+<div th:class="${#lists.size(topProduct) > 0} ? 'statistics-page' : 'hide'">
+	<ul class="order-page">
+		<li th:each="pageNumber : ${#numbers.sequence(1, totalTopProduct)}"><a
+			th:href="${pageNumber == ptp} ? '#!' : @{'/admin/statistics'  + '?ptp=' + ${pageNumber}}"
+			th:text="${pageNumber}"
+			th:class="${pageNumber == ptp} ? 'page-active' : ''"></a></li>
+	</ul>
+</div>

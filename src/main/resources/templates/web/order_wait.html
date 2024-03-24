@@ -1,0 +1,33 @@
+<div class="shz-profile">
+	<div class="profile-content r-content">
+		<div class="profile-body" style="">
+			<div class="pc-left" style="width: 30%">
+				<ul>
+					<li><a th:href="@{/user/profile}" style="color:black">Tài khoản</a></li>
+					<li><a th:href="@{/user/bought}" style="color:black">Đơn hàng đã mua</a></li>
+					<li style="background: orange;color:white"><a style="color:white" th:href="@{/user/order-wait}">Đơn hàng đang chờ</a></li>
+					<li><a style="color:black" th:href="@{/user/order-cancel}">Đơn hàng đã hủy</a></li>
+				</ul>
+			</div>
+			<div class="pc-right">
+				<p th:class="${size != 0} ? 'hide': ''">Bạn chưa mua sản phẩm nào</p>
+				<table th:class="${size == 0} ? 'hide':''">
+					<tr>
+						<th>#</th>
+						<th>Sản phẩm</th>
+						<th>Số lượng</th>
+						<th>Giá sản phẩm</th>
+						<th></th>
+					</tr>
+					<tr th:each="o, i : ${lisOrder}">
+						<td th:text="${i.count}">1</td>
+						<td th:text="${o.product.productName}">Sản phẩm</td>
+						<td th:text="${o.quantity}">Số lượng</td>
+						<td th:text="${#numbers.formatDecimal(o.totalPrice, 1, 'POINT', 0, 'POINT')} + 'đ'">Giá sản phẩm</td>
+						<td><a th:href="@{'/shoza/product/' + ${o.product.productTitle}}"><i class="fa-solid fa-arrow-right"></i></a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

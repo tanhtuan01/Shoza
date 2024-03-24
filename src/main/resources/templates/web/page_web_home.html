@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" th:href="@{/img/shoza.png}">
+<title>Shoza - Mua sắm trực tuyến</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- SLICK SLIDER -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" th:href="@{/css/base.css}">
+<link rel="stylesheet" th:href="@{/css/web/home.css}">
+<link rel="stylesheet"
+	th:href="@{/css/web/list_product_by_category.css}">
+<link rel="stylesheet" th:href="@{/css/web/view_product.css}">
+<link rel="stylesheet" th:href="@{/css/web/cart.css}">
+<link rel="stylesheet" th:href="@{/css/web/profile.css}">
+</head>
+
+<body style="padding-top: 120px">
+	<div class="shz__nav">
+		<div class="shz-header">
+			<div class="shz-header-content">
+				<div class="shz-links-bar">
+					<div class="links-bar-list r-content">
+						<div class="top-link-item">
+							<a th:href="@{/shoza/feedback}">Góp ý</a>
+						</div>
+						<div class="top-link-item">
+							<a th:href="@{/shoza/introduce}">Giới Thiệu</a>
+						</div>
+						<div class="top-link-item" id="link-item-order">
+							<a href="">Kiểm tra đơn hàng</a>
+							<div class="item-order-box">
+								<h1>Kiểm tra đơn hàng</h1>
+								<form>
+									<div class="form-group">
+										<label>Số điện thoại nhận hàng</label> <input type="text"
+											 id="orderPhone">
+									</div>
+									<div class="form-group">
+										<label>Mã đơn hàng</label> <input type="text"
+											placeholder="Mã đơn hàng" id="orderCode">
+									</div>
+									<input type="submit" value="Tìm đơn hàng" class="btn">
+								</form>
+							</div>
+						</div>
+						<div
+							th:class="${user} != null ? 'top-link-item user-logged': 'top-link-item'"
+							id="link-item-user">
+							<a th:id="${user != null ? 'user-name': ''}"
+								th:href="${user} != null ? '#!' : '/login'"
+								th:text="${user} != null ? ${user.userName} : 'Đăng nhập'"></a>
+							<div
+								th:class="${user != null}  ? 'item-user-box' : 'item-user-box hide'">
+								<ul>
+									<li><a th:href="@{'/user/profile'}">Tài khoản của tôi</a></li>
+									<li><a th:href="@{'/logout'}">Đăng xuất</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="top-link-item">
+							<a th:href="@{'/register'}">Đăng ký</a>
+						</div>
+					</div>
+				</div>
+				<div class="shz-logo-bar">
+					<div class="logo-bar-content r-content">
+						<div class="shz-logo">
+							<a href="/"> <img th:src="@{/img/shoza.png}" alt="">
+							</a>
+						</div>
+						<div class="shz-search-box">
+							<div class="shz-search-input">
+								<input type="text" name="" id="textSeach"
+									oninput="searchInput()" placeholder="Tìm kiếm trên Shoza">
+								<div class="search-menu-option" id="searchInputBox">
+									<ul class="search-input-option">
+
+									</ul>
+								</div>
+								<div class="remove-box-option" id="removeBoxInput">
+									<a onclick="removeBoxInput()"><i class="fa-solid fa-x"></i></a>
+								</div>
+							</div>
+							<div class="shz-search-button">
+								<!-- <button type="submit">Tìm Kiếm</button> -->
+								<button onclick="searchProduct()">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</button>
+							</div>
+						</div>
+						<div class="shz-cart">
+							<a th:href="@{/shoza/my-cart/}" class="icon-cart"> <i
+								class="fa-solid fa-basket-shopping" id="color-gradient"></i> <span
+								id="totalQUANTITY"
+								th:text="${totalQuantity != null} ? ${totalQuantity} : '0'"></span>
+							</a>
+							<div class="cart-box" id="cartBox"
+								th:class="${hide=='none'} ? 'hide' : 'cart-box'">
+								<div class="cart-box-content" id="cartNotNull">
+									<div class="cart-title-header" id="cartBoxHeader">giỏ
+										hảng của bạn</div>
+									<div class="cart-item" id="cartBoxItem">
+										<ul>
+											<li th:if="${listCartByUser != null}"
+												th:each="p : ${listCartByUser}"><a
+												th:href="'/shoza/product/'+${p.product.productTitle}">
+													<div class="cart-in-item">
+														<div class="in-item-img">
+															<img
+																th:src="'/img/web/product/' + ${p.product.productImage}"
+																alt="">
+														</div>
+														<div class="in-item-name"
+															th:text="${p.product.productName}"></div>
+														<div class="in-item-price">
+															<div class="price"
+																th:text="${#numbers.formatDecimal(p.product.productCurrentPrice, 1, 'POINT', 0, 'POINT')} + 'đ'"></div>
+															<div class="quantity" th:text="'x' + ${p.quantity}"></div>
+														</div>
+													</div>
+											</a></li>
+
+
+										</ul>
+									</div>
+									<div class="cart-footer">
+										<a th:href="@{/shoza/my-cart}" class="btn">Xem giỏ hàng</a>
+									</div>
+								</div>
+								<div class="cart-box-empty" id="cartBoxEmpty">
+									<img th:src="@{/img/empty-cart.png}" alt="">
+									<div class="empty-text">Giỏ hàng của bạn trống</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="sh__main">
+		<div th:replace="~{${content}}"></div>
+	</div>
+	<section class="shz__footer">
+		<div class="footer-content r-content">
+			<div class="footer-row">
+				<div class="footer-colx3">
+
+					<div>
+						<img src="/img/shoza.png">
+					</div>
+					<div class="footer-col-title"></div>
+				</div>
+				<div class="footer-colx3">
+
+					<div class="footer-col-title">chăm sóc khách hàng</div>
+					<div>
+						<ul>
+							<li><a>Trung Tâm Trợ Giúp</a></li>
+							<li><a>Hướng Dẫn Mua Hàng</a></li>
+							<li><a>Chăm Sóc Khách Hàng</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer-colx3">
+					<div class="footer-col-title">Về Shoza</div>
+					<div>
+						<ul>
+							<li><a href="#!">Giới Thiệu</a></li>
+							<li><a href="#!">Điều Khoản</a></li>
+							<li><a href="#!">Liên Hệ</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer-colx3">
+					<div class="footer-col-title">Theo dõi chúng tôi trên</div>
+					<div>
+						<ul>
+							<li><a href="#!"><i class="fa-brands fa-facebook"></i>&nbsp;Facebook</a>
+							</li>
+							<li><a href="#!"><i class="fa-brands fa-twitter"></i>&nbsp;Twitter</a>
+							</li>
+							<li><a href="#!"><i class="fa-brands fa-youtube"></i>&nbsp;Youtube</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="footer-row">
+				<div class="author">
+					<i class="fa-solid fa-copyright"></i> 2024 Shoza by <a>tat</a>
+				</div>
+			</div>
+
+			<!-- 	<div sec:authorize="isAuthenticated()"><span sec:authentication="principal.username"></span></div>  -->
+		</div>
+	</section>
+
+	<div class="dialog-overlay" id="dialogOverlay">
+		<div class="dialog-content">
+			<div class="dialog-title">Xác nhận xóa</div>
+			<p id="txt-msg">Bạn có chắc chắn muốn xóa?</p>
+			<div class="dialog-buttons">
+				<button class="primary" id="confirm-delete"
+					onclick="confirmDelete(event)">Xóa</button>
+				<button class="secondary" id="cancel-delete"
+					onclick="cancelDelete(event)">Hủy</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="shoza-notify" id="shozaNotify">
+		<div class="dialog-content">
+			<p id="txt-msg">Thêm vào giỏ hàng thành công</p>
+			<div class="dialog-buttons">
+				<button class="secondary" id="cancel-delete"
+					onclick="closeNotify(event)">Tiếp tục mua</button>
+			</div>
+		</div>
+	</div>
+	<!-- SLICK SLIDER -->
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/web/home_category_slider.js}"></script>
+	<script type="text/javascript" th:src="@{/js/web/home_top_slider.js}"></script>
+	<!-- SLICK SLIDER -->
+	<script type="text/javascript" th:src="@{/js/web/view_product.js}"></script>
+	<script type="text/javascript" th:src="@{/js/web/home.js}"></script>
+	<script type="text/javascript" th:src="@{/js/web/base.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/js/web/render_product_list.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/js/web/render_list_product_by_category.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/js/web/view_product_render.js}"></script>
+	<script type="text/javascript" th:src="@{/js/web/cart.js}"></script>
+	<script type="text/javascript" th:src="@{/js/web/confirm_dialog.js}"></script>
+	<script type="text/javascript" th:src="@{/js/web/feedback.js}"></script>
+</body>
+
+</html>

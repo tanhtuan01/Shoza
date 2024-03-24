@@ -1,0 +1,118 @@
+table#orders {
+	width: 100%;	
+}
+
+table#orders tr th{
+	border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+	text-align: left;
+	font-size: 17px;
+	font-weight: 500;
+	margin-bottom: 5px;
+}
+
+table#orders tr td{
+	font-size: 15px;
+}
+
+table#orders tr th, table#orders tr td{
+	padding: 10px 5px;
+}
+
+table#orders tr th#stt{
+	width: 50px;
+}
+table#orders tr th#name, table#orders tr th#phone{
+	width: 12%;
+}
+table#orders tr th#address{
+	width: 30%;
+}
+table#orders tr th#status
+{
+	width: 15%;
+}
+
+table#orders tr th#price, table#orders tr th#update{
+	width: 8%;
+}
+
+table#orders tr td a {
+	font-size: 15px;
+}
+
+table#orders tr td select{
+	width: 100%;
+	padding: 5px;
+	border-radius: 5px;
+	border-color: rgb(225 212 212);
+}
+table#orders tr td{
+	border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+table#orders tr td#empty{
+	padding: 5px;
+	background: white;
+}
+
+table#orders tr td a {
+	display: block;
+	text-align: center;
+	font-size: 16px;
+}
+
+.order-page {
+	display: flex;
+	height: 50px;
+	justify-content:center;
+	align-items: center;
+	background: white;
+}
+
+.order-page li a{
+	padding: 10px 15px;
+	margin: 5px;
+	border-radius: 5px;
+	border: 1px solid black;
+	display: block;
+}
+
+.order-page .page-active{
+	color: white;
+	font-weight: bold;
+background: linear-gradient(to right,rgb(128 104 130),rgb(139 158 98));
+border: none;
+}
+
+.hide{
+	display: none!important;
+}
+.order-option{
+	text-align: center;
+}
+
+.order-option ul{
+	background: white;
+	padding: 5px;
+}
+
+.order-option li{
+	display: inline-block;
+	padding: 5px 10px;
+}
+
+.order-option form select{
+	padding: 3px 10px;
+	border-radius: 5px;
+}
+.order-option.form{
+	padding: 5px 10px;
+	background: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.order-option.form form{
+	margin: 0 10px;
+}

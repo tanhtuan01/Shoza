@@ -1,0 +1,70 @@
+<div class="home-to">
+	<span><a href="">Trang Chủ</a> > <a th:href="@{/admin/product}">Sản Phẩm</a> > <a
+		href="#!"> Xem</a></span>
+	<form action="" method="get" id="myFormSelectProduct">
+		<select id="mySelectProduct">
+			<option th:each="p : ${list}" th:value="${p.id}"
+				th:text="${p.productName}">1</option>
+		</select> <input type="submit" class="btn" value="Chọn">
+	</form>
+</div>
+<div class="preview-product" th:object="${product}">
+
+	<div class="pr-left">
+		<img style="" th:src="'/img/web/product/' + *{productImage}"
+			alt="Hình ảnh hiển thị của sản phẩm">
+	</div>
+	<div class="pr-right">
+		<div class="pr-row">
+			<div class="pr-title" th:text="${product.productName}">Tên Sản
+				Phẩm</div>
+		</div>
+		<div class="pr-row">
+			<div class="pr-r-left">Giá Chưa Giảm</div>
+			<div class="pr-r-right"
+				th:text="${#numbers.formatDecimal(product.productOldPrice, 1, 'POINT', 0, 'POINT')} + 'đ'">0</div>
+		</div>
+		<div class="pr-row">
+			<div class="pr-r-left">Giảm (%)</div>
+			<div class="pr-r-right" th:text="${product.productDiscount}">0</div>
+		</div>
+		<div class="pr-row">
+			<div class="pr-r-left">Giá Sau Khi Giảm</div>
+			<div class="pr-r-right"
+				th:text="${#numbers.formatDecimal(product.productOldPrice, 1, 'POINT', 0, 'POINT')} + 'đ'">0</div>
+		</div>
+		<div class="pr-row">
+			<div class="pr-r-left">Số Lượng</div>
+			<div class="pr-r-right"
+				th:text="${#numbers.formatDecimal(product.productQuantity, 1, 'POINT', 0, 'POINT')}"></div>
+		</div>
+		<div class="pr-row">
+			<div class="pr-r-left">Đã bán</div>
+			<div class="pr-r-right"
+				th:text="${#numbers.formatDecimal(product.productSold, 1, 'POINT', 0, 'POINT')}">0</div>
+		</div>
+		<div class="pr-row">
+			<div class="pr-r-left">Danh Mục</div>
+			<div class="pr-r-right" th:text="${product.categoryName}"></div>
+		</div>
+	</div>
+
+</div>
+<div class="home-to"
+	style="font-size: 22px; margin-top: 2px; padding: 10px">Mô tả</div>
+<div id="previewAddProduct">
+	<div th:text="${product.productDescription}" id="DATA"
+		style="display: none"></div>
+</div>
+<script>
+var selectElement = document.getElementById('mySelectProduct');
+var formElement = document.getElementById('myFormSelectProduct');
+
+formElement.addEventListener('submit', function() {
+    var selectedOption = selectElement.value;
+
+    var currentUrl = window.location.href;
+    var newAction = currentUrl.replace(/\/admin\/product\/preview\/?.*/, "/admin/product/preview/" + selectedOption);
+    formElement.action = newAction;
+});
+</script>

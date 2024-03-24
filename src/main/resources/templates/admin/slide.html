@@ -1,0 +1,32 @@
+<div class="shz-header-title">Chỉnh Sửa Slide</div>
+
+<div class="set-slide">
+	<div class="form-add-slide">
+		<form th:action="@{/admin/slide/addSlide}"
+			enctype="multipart/form-data" method="post">
+			<div class="form-title">Thêm Slide</div>
+			<div class="set-slide-image">
+
+				<input type="file" name="slideImg" required accept="image/*">
+			</div>
+			<div>Đường dẫn</div>
+			<div class="set-slide-link">
+				<input type="text" name="link" required placeholder="Nhập đường dẫn">
+			</div>
+			<div class="">
+				<input type="submit" class="btn" value="Thêm">
+			</div>
+		</form>
+	</div>
+	<div class="slide-list">
+		<div class="list-slide-show">
+			<div class="slide-show-item" th:each="s : ${slides}">
+				<img th:src="'/img/web/slide/'+ ${s.image}" alt="">
+				<p>
+					<a th:href="${s.link}" th:text="${s.link}"></a>
+				</p>
+				<a th:href="@{'/admin/slide/deleteSlide?id=' + ${s.id}}" class="slide-delete">x</a>
+			</div>
+		</div>
+	</div>
+</div>

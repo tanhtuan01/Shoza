@@ -1,0 +1,87 @@
+<div class="shz-header-title">Thông tin</div>
+
+<div class="web-info" style="">
+
+	<div class="r4">
+		<p>Hotline</p>
+		<br> <small>Hiện tại: <span
+			th:text="${shoza_hotline}"></span></small>
+		<form method="post"
+			th:action="@{/admin/web-info/shoza-hotline}">
+			<input type="number" name="shoza_hotline"
+				placeholder="Hotline mới"> <input
+				class="btn" type="submit" value="Cập nhật">
+		</form>
+	</div>
+
+	<div class="r4">
+		<p>Email</p>
+		<br> <small>Email hiện tại: <span
+			th:text="${contact_email}"></span></small>
+		<form method="post" th:action="@{/admin/web-info/contact-email}">
+			<input type="email"
+				placeholder="Email liên hệ mới"
+				name="contact_email"> <input class="btn" type="submit"
+				value="Cập nhật">
+		</form>
+
+	</div>
+
+	<div class="r4"></div>
+
+	<div class="r4"></div>
+
+</div>
+
+<div class="shz-header-title">Hiển thị sản phẩm</div>
+
+<div class="web-info" style="">
+
+	<div class="r4">
+		<p>Trang Chủ</p>
+		<br> <small>Số sản phẩm hiển thị dưới danh mục: <span
+			th:text="${index_product_below_category}"></span></small>
+		<form method="post"
+			th:action="@{/admin/web-info/product-below-category}">
+			<input type="number" name="index_product_below_category"
+				placeholder="Số sản phẩm theo danh mục - trang chủ"> <input
+				class="btn" type="submit" value="Cập nhật">
+		</form>
+	</div>
+
+	<div class="r4">
+		<p>Danh Mục</p>
+		<br> <small>Số sản phẩm theo danh mục: <span
+			th:text="${product_by_category}"></span></small>
+		<form method="post" th:action="@{/admin/web-info/product-by-category}">
+			<input type="text"
+				placeholder="Số sản phẩm theo danh mục - trang chủ"
+				name="product_by_category"> <input class="btn" type="submit"
+				value="Cập nhật">
+		</form>
+
+	</div>
+
+	<div class="r4"></div>
+
+	<div class="r4"></div>
+
+</div>
+
+
+<div class="shz-header-title">Bài Viết</div>
+
+<div class="web-info article" style="">
+
+
+	<ul>
+		<li>Giới Thiệu <a
+			th:href="@{/admin/web-info/article/view-introduce}">xem</a>
+		</li>
+		<li>| Giới Thiệu <a
+			th:href="@{/admin/web-info/article/view-introduce}">xem</a>
+		</li>
+	</ul>
+
+
+</div>

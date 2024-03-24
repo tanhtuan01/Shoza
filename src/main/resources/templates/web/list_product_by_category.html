@@ -1,0 +1,116 @@
+<div class="replace">
+	<div class="shz-top-content">
+		<div class="shz-slider r-content"></div>
+	</div>
+	<div class="shz-category-product">
+		<div class="shz-product-content r-content">
+			<div class="shz-header-title">
+				DANH MỤC : <span th:text="${category != null} ? ${category.categoryName} : ${text}">thời
+					trang</a>
+				</span> <span></span>
+			</div>
+			<div class="shz-category">
+				<div class="category-top-bar">
+					<div class="top-bar-option">
+						<div class="left-option">
+							<p></p>
+						</div>
+						<div class="option-sort-by">
+
+							<div class="option-sort">
+								<a href="" class="btn-solid" id="color-gradient">Bán chạy</a>
+							</div>
+							<div class="option-sort">
+								<a href="" class="btn-solid" id="color-gradient">Giá tăng
+									dần</a>
+							</div>
+							<div class="option-sort">
+								<a href="" class="btn-solid" id="color-gradient">Giá giảm
+									dần</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="category-product-content">
+					<div class="content-category">
+						<ul>
+							<li th:each="c : ${listCategory}"><a
+								th:href="@{'/shoza/category/' + ${c.categoryTitle}}"
+								th:text="${c.categoryName}">Thời trang Nam</a></li>
+						</ul>
+						<div class="space"></div>
+						<div class="content-left-price">
+							<div class="left-price-title">Giá</div>
+							<form action="" style="" id="left-form-price">
+								<div>
+									<input min="0" type="number" onkeydown="checkENumber(event)"
+										name="" id="minPrice" placeholder="Tối thiểu"> <input
+										min="0" type="number" onkeydown="checkENumber(event)" name=""
+										id="maxPrice" placeholder="Tối đa">
+								</div>
+								<div>
+									<button type="submit" style="border: none">
+										<i class="fa-solid fa-play"></i>
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="content-product product-by-category">
+						<div class="product-list">
+							<a id="p-item" class="p-b-c" th:each="p : ${listProduct}"
+								th:href="@{'/shoza/product/' + ${p.productTitle}}">
+								<div class="product-item">
+									<div class="product-item-img">
+										<div class="product-img-main">
+											<img th:src="'/img/web/product/' + ${p.productImage}" alt="">
+										</div>
+									</div>
+									<div class="product-item-title" th:text="${p.productName}"></div>
+									<div class="product-item-price">
+										<div class="product-new-price">
+											<div class="price"
+												th:text="${#numbers.formatDecimal(p.productCurrentPrice, 1, 'POINT', 0, 'POINT')}">88.888</div>
+											<div class="currency">đ</div>
+										</div>
+										<div class="product-old-price">
+											<div class="old-price">
+												<del
+													th:text="${#numbers.formatDecimal(p.productOldPrice, 1, 'POINT', 0, 'POINT')}">99.000</del>
+											</div>
+											<div class="currency">đ&nbsp;&nbsp;</div>
+											<div class="discount"
+												th:text="'-' + ${p.productDiscount} +'%'">-5%</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="page">
+							<ul>
+								<li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}" th:unless="${pageNumber == 0}">
+									<a th:if="${category != null}"
+									th:href="${pageNumber == page} ? '#!' : @{'/shoza/category/' + ${category.categoryTitle} + '?page=' + ${pageNumber}}"
+									th:text="${pageNumber}"
+									th:class="${pageNumber == page} ? 'page-active' : ''"></a>
+								</li>
+							</ul>
+						</div>
+						
+						<div class="page">
+							<ul>
+								<li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}" th:unless="${pageNumber == 0}">
+									<a th:if="${category == null}"
+									th:href="${pageNumber == page} ? '#!' : @{'/shoza/search?product=' +${product} + '&page=' + ${pageNumber}}"
+									th:text="${pageNumber}"
+									th:class="${pageNumber == page} ? 'page-active' : ''"></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,134 @@
+<div class="home-to">
+	<span><a href="">Trang Chủ</a> > <a href="">Danh Sách</a> > <a
+		href="#!" th:text="${titleAddEdit}"> Thêm Sản Phẩm</a></span>
+</div>
+
+<div id="divProductMessage"></div>
+
+<div  th:class="${act == 'add'} ? 'hide' : 'home-to edit-select-product'">
+	<p>Chọn sản phẩm:</p>
+	<form th:action="@{/admin/product/edit}" method="GET">
+		<select name="id">
+			<option th:each="p: ${listProduct}" th:value="${p.id}"
+				th:text="${p.productName}"></option>
+		</select>
+		<input class="btn" type="submit" value="Chọn">
+	</form>
+</div>
+
+<div class="shz-add-product">
+	<div class="shz-header-title" th:text="${titleAddEdit}"></div>
+	<div class="form-add">
+		<form th:class="${enable != 'enable'} ? 'hide' : '' " id="formAddProduct"
+			th:action="${act} == 'add' ? @{/admin/product/save} : @{/admin/product/edit/save}"
+			method="post" enctype="multipart/form-data" th:object="${product}">
+			<input type="hidden" th:field="*{id}" id="ID"> <input
+				type="hidden" th:value="${act}" id="ACT">
+			<div class="shz-form-row">
+				<div class="form-col-left text-up-14">Tên sản phẩm</div>
+				<div class="form-col-right">
+					<input th:field="*{productName}" type="text" name=""
+						id="tenDanhMuc" autofocus oninput="convertToSlug()" required>
+				</div>
+			</div>
+			<div class="shz-form-row">
+				<div class="form-col-left text-up-14">Tiêu đề</div>
+				<div class="form-col-right">
+					<input th:field="*{productTitle}" type="text" name="" id="tieuDe"
+						readonly>
+				</div>
+			</div>
+			<div class="shz-form-row">
+				<div class="form-col-left text-up-14">giá tiền</div>
+				<div class="form-col-right">
+					<input th:field="*{productOldPrice}" required
+						onkeydown="checkENumber(event)" type="number" name="price"
+						id="price">
+				</div>
+			</div>
+			<div class="shz-form-row">
+				<div class="form-col-left text-up-14">giảm (%)</div>
+				<div class="form-col-right">
+					<input th:field="*{productDiscount}" min="0" max="100"
+						onkeydown="checkENumber(event)" type="number" name="discount"
+						id="discount" placeholder="%">
+				</div>
+			</div>
+			<div class="shz-form-row">
+				<div class="form-col-left text-up-14">giá mới</div>
+				<div class="form-col-right">
+					<input th:field="*{productCurrentPrice}" type="number"
+						name="newprice" id="newPrice" placeholder="Giá mới" readonly>
+				</div>
+			</div>
+			<div class="shz-form-row">
+				<div class="form-col-left text-up-14">số lượng</div>
+				<div class="form-col-right">
+					<input th:field="*{productQuantity}" type="number"
+						onkeydown="checkENumber(event)" name="" id=""
+						placeholder="Nhập số lượng">
+				</div>
+			</div>
+			<div class="shz-form-row">
+				<div class="form-col-left text-up-14">danh mục</div>
+				<div class="form-col-right">
+					<select th:field="*{idCategory}" name="" id="">
+						<option th:each="ctg : ${listCategory}" th:value="${ctg.id}"
+							th:text="${ctg.categoryName}"
+							th:select="${(ctg.id == product.idCategory) && (act == 'edit')}">DANH
+							MỤC</option>
+					</select>
+				</div>
+			</div>
+			<div class="shz-form-row">
+				<div class="form-col-left text-up-14">hình ảnh</div>
+				<div class="form-col-right">
+					<input type="file" name="productIMG" id=""
+						th:required="${act == 'add'}" onchange="changeImgPR(this)">
+				</div>
+			</div>
+			<div class="shz-form-row">
+				<div class="form-col-left text-up-14"></div>
+				<div class="form-col-right">
+					<img
+						th:src="${product.productImage != null ? '/img/web/product/'+product.productImage : ''}"
+						alt="" id="imgSelected">
+				</div>
+			</div>
+			<div th:class="${act == 'edit'} ? 'hide' : 'shz-form-row' ">
+				<div class="form-col-left text-up-14">ảnh kèm theo</div>
+				<div class="form-col-right">
+					<input type="file" multiple name="productIMGList[]"
+						accept="images/**" id="selectListImg"
+						th:required="${act == 'add'}">
+				</div>
+			</div>
+			<div th:class="${act == 'edit'} ? 'hide' : 'shz-form-row' ">
+				<div class="form-col-left text-up-14"></div>
+				<div class="form-col-right">
+					<div id="listImgSelected"></div>
+				</div>
+			</div>
+			<div class="shz-form-row">
+				<div class="form-col-left text-up-14">mô tả</div>
+				<div class="form-col-right">
+					<textarea th:field="*{productDescription}" name="description"
+						id="editor" cols="30" rows="30"></textarea>
+				</div>
+			</div>
+			<div class="" th:class="${enable == 'enable'} ? 'shz-form-row' : 'hide' ">
+				<div class="form-col-left text-up-14"></div>
+				<div class="form-col-right">
+					<div class="input-sub-res">
+						<div class="input-sub">
+							<input type="submit" class="btn" th:value="${act == 'add'} ? 'THÊM' : 'SỬA'" name="" id="">
+						</div>
+						<div class="input-res">
+							<input type="reset" class="btn" value="NHẬP LẠI" name="" id="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

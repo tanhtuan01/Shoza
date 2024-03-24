@@ -1,0 +1,97 @@
+<div class="home-to" >
+	<span><a th:href="@{/admin}">Trang Chủ</a> > <a href="#!">Danh Mục</a></span>
+	<p>
+		<a href="#!" class="btn" th:onclick="openModal('new', this,0)">Thêm Mới</a>
+	</p>
+</div>
+<div class="shz-header-title">danh sách danh mục</div>
+<div class="table">
+	<table class="category-table"  id="categoryTable">
+		<thead style="text-align: left">
+			<tr>
+				<th>#</th>
+				<th>IMG</th>
+				<th>Tên danh mục</th>
+				<th>Tiêu đề</th>
+				<th>Trạng thái</th>
+				<th>Sửa</th>
+				<th>Xóa</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="ctg, i : ${list}">
+				<td th:text="${i.count}">1</td>
+				
+				<td class="hinhanh">
+					<img th:src="'/img/web/category/' + ${ctg.categoryImage}"
+					alt="">
+				</td>
+				<td class="tendanhmuc" th:text="${ctg.categoryName}"></td>
+				<td class="tieude" th:text="${ctg.categoryTitle}"></td>
+				<td class="trangthai" th:text="${ctg.setStatus()}" th:attr="data-value= ${ctg.categoryStatus}"></td>
+				<td><a href="#!" th:onclick="'openModal(\'edit\', this,' + ${ctg.id} +')'"> <i
+						class="fa-solid fa-pen-to-square"></i>
+				</a></td>
+				<td><a href="#!" th:attr="data-id=${ctg.id}, data-name=${ctg.categoryName}" th:href="@{'/admin/category/delete/' + ${ctg.id}}" onclick="showConfirmationDialog(event)"> <i class="fa-solid fa-trash"></i>
+				</a></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<td></td>
+			<td></td>
+			<td>Tên danh mục</td>
+			<td>Tiêu đề</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tfoot>
+	</table>
+</div>
+<div class="modal modal-category" id="modal">
+	<div class="modal-content">
+		<div id="titleForm" class="shz-header-title">Thêm Mới Danh Mục</div>
+		<form th:action="@{/admin/category/save}" th:object="${category}" enctype="multipart/form-data" method="POST">
+			<input type="hidden" th:field="${category.id}" id="idDanhMuc" value="">
+			<div id="modalCategoryMessage"></div>
+			<div class="form-group">
+				<div class="title">
+					<h6>Tên Danh Mục</h6>
+				</div>
+				<div>
+					<input type="text" th:field="${category.categoryName}" id="tenDanhMuc" oninput="convertToSlug()"
+						required />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-3">
+					<h6>Tiêu Đề Hiển Thị</h6>
+				</div>
+				<div class="col-md-9">
+					<input type="text" id="tieuDe" th:field="${category.categoryTitle}" readonly />
+				</div>
+			</div>
+			<div class="form-group">
+				<img src="" alt="" id="hinhAnh"> <input type="file" name="categoryIMG"
+					onchange="changeIMG(this)" accept="image/*">
+			</div>
+			<div class="form-group">
+				<div class="col-md-3">
+					<h6>Hiển thị sản phẩm (trang chủ)</h6>
+				</div>
+				<div class="col-md-9">
+					<select id="trangThai" th:field="${category.categoryStatus}">
+						<option value="1">Hiển thị</option>
+						<option value="0">Không hiển thị</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<input id="btnDanhMuc" type="submit" class="btn" value="Thêm">
+			</div>
+		</form>
+		<div class="close">
+			<a href="#!" id="close">X</a>
+		</div>
+	</div>
+</div>
+

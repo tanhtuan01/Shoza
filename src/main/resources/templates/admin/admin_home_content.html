@@ -1,0 +1,115 @@
+<div class="top-body-content">
+	<div class="top-content-item">
+		<div class="left">
+			<div class="content-item-icon">
+				<img th:src="@{/img/admin/currency.png}" alt="">
+			</div>
+			<div class="content-item-title">Doanh Thu</div>
+		</div>
+		<div class="right"
+			th:text="${#numbers.formatDecimal(sumrevenue, 1, 'POINT', 0, 'POINT')} + 'đ'">999.999đ</div>
+	</div>
+	<div class="top-content-item">
+		<div class="left">
+			<div class="content-item-icon">
+				<img th:src="@{/img/admin/users.png}" alt="">
+			</div>
+			<div class="content-item-title">Người Dùng</div>
+			<div class="content-item-link">
+				<a href="">Xem</a>
+			</div>
+		</div>
+		<div class="right" th:text="${cuser}">999.999</div>
+	</div>
+	<div class="top-content-item">
+		<div class="left">
+			<div class="content-item-icon">
+				<img th:src="@{/img/admin/ship_success.png}" alt="">
+			</div>
+			<div class="content-item-title">Đơn Thành Công</div>
+		</div>
+		<div class="right" th:text="${cosuccess}">999.999</div>
+	</div>
+	<div class="top-content-item">
+		<div class="left">
+			<div class="content-item-icon">
+				<img th:src="@{/img/admin/failed.png}" alt="">
+			</div>
+			<div class="content-item-title">Đơn Thất Bại</div>
+		</div>
+		<div class="right" th:text="${cofail}">999.999</div>
+	</div>
+	<div class="top-content-item">
+		<div class="left">
+			<div class="content-item-icon">
+				<img th:src="@{/img/admin/product.png}" alt="">
+			</div>
+			<div class="content-item-title">Sản Phẩm</div>
+		</div>
+		<div class="right" th:text="${cproduct}">999.999</div>
+	</div>
+</div>
+
+<div class="shz-header-title">Doanh thu từ đơn hàng</div>
+<div class="order-option form">
+	<span><a th:href="@{'/admin?sort=all'}">Toàn bộ</a> | <a th:href="@{'/admin?sort=today'}">Hôm nay</a> hoặc </span>
+	<span>(MM/dd/YYYY)</span>
+	<form th:action="@{/admin}" method="get">
+		<input type="hidden" name="sort" value="date"> 
+		<select name="month" id="month"></select>
+		<select name="day" id="day"></select> 
+		
+		<select name="year" id="year"></select> 
+		<input type="submit" class="btn">
+	</form>
+
+</div>
+<div class="top-body-content">
+	<table cellspacing="20" cellpadding="0">
+
+		<tr>
+			<th>#</th>
+			<th>Người nhận</th>
+			<th>Số điện thoại</th>
+			<th>Địa chỉ</th>
+			<th>Số tiền</th>
+			<th>Thời gian</th>
+			<th>Trạng thái</th>
+			<th></th>
+		</tr>
+		<tr th:each="o,i : ${order}">
+			<td th:text="${i.count}">1</td>
+			<td th:text="${o.orderUserName}">Người nhận</td>
+			<td th:text="${o.orderPhone}">Số điện tdoại</td>
+			<td th:text="${o.orderAddess}">Địa chỉ</td>
+			<td style="font-weight: bold"
+				th:text="'+' + ${#numbers.formatDecimal(o.orderTotalPrice, 1, 'POINT', 0, 'POINT')} + 'đ'">Số
+				tiền</td>
+			<td th:text="${o.orderStatusAt}">Thời gian</td>
+			<td th:text="${o.getStatus()}">Trạng thái</td>
+			<td><a href="#" th:onclick="'openOrderDetail('+${o.id}+')'">Chi
+					tiết</</a></td>
+		</tr>
+	</table>
+
+	
+</div>
+
+<div th:class="${sort == 'date' ? 'hide' : 'page'}" class="page" style=" background: white;">
+		<ul class="order-page">
+			<li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}"
+				th:unless="${pageNumber == 0}"><a
+				th:href="${pageNumber == page} ? '#!' : @{'/admin' + '?page=' + ${pageNumber}} +'&sort=' +${sort}"
+				th:text="${pageNumber}"
+				th:class="${pageNumber == page} ? 'page-active' : ''"></a></li>
+		</ul>
+	</div>
+	<div th:class="${sort == 'all' || sort == 'today' ? 'hide' : 'page'}" class="page" style=" background: white;">
+		<ul class="order-page">
+			<li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}"
+				th:unless="${pageNumber == 0}"><a
+				th:href="${pageNumber == page} ? '#!' : @{('/admin?page=' + ${pageNumber} + '&sort=' + ${sort} + '&day=' + ${d} + '&month=' + ${m} + '&year=' + ${y})}"
+				th:text="${pageNumber}"
+				th:class="${pageNumber == page} ? 'page-active' : ''"></a></li>
+		</ul>
+	</div>

@@ -1,0 +1,92 @@
+.slide-show-item img{
+	padding: 10px;
+	width: 220px;
+	height: 150px;
+	border-radius: 15px;
+}
+
+.set-slide div{
+	padding: 10px 5px;
+}
+
+.set-slide div input{
+	background: white;
+	padding: 10px;
+	width: 350px;
+}
+
+.set-slide .form-title{
+	font-size:18px;
+}
+.slide-show-item{
+	position: relative;
+}
+
+.slide-delete{
+	position: absolute;
+	top: 0;
+	display: block;
+	right:0;
+	padding: 7px 15px;
+	background: silver;
+	color:white;
+	border-radius: 50%;
+}
+
+.set-slide{
+	display: flex;
+	
+}
+
+.set-slide .form-add-slide{
+	width: 40%;
+}
+
+.list-slide-show{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+
+.web-info{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.web-info .r4{
+	width: 23%;
+	margin: 10px;
+	background: white;
+	padding: 10px 5px;
+}
+
+.web-info .r4 form input{
+	padding: 7px 14px;
+	width: 100%;
+	background: white;
+	border: 1px solid rgba(0,0,0,.09);
+	font-size: 12px;
+	margin: 10px 0;
+}
+
+.r4 input.btn{
+	width: 80%!important;
+	display: block;
+	margin: auto!important;
+}
+
+#articleIntroduce{
+	padding: 10px 20px;
+	background-color: white;
+}
+
+.web-info.article{
+	background: white;
+	padding: 10px 20px;
+}
+
+.web-info.article ul li{
+	display: inline-block;
+}

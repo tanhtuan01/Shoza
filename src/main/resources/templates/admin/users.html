@@ -1,0 +1,114 @@
+<div class="home-to">
+	<span><a href="">Trang Chủ</a> > <a href="">Người Dùng</a></span>
+	<p style="margin-top: 10px">
+		<a href="#!" class="btn" onclick="openModalAddUser(this)">Thêm Mới</a>
+	</p>
+</div>
+<div class="user-table" id="UserTable">
+
+	<table class="category-table" style="" id="categoryTables">
+		<thead style="text-align: left">
+			<tr>
+				<th>#</th>
+				<th>Người dùng</th>
+				<th>Email</th>
+				<th>Role</th>
+				<th>Cập Nhật</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="u,i : ${list}">
+				<td th:text="${i.count}"></td>
+	
+				<td class="tennguoidung" th:text="${u.userName}">Gấu Bông Mới 2024</td>
+				<td th:text="${u.email}">123@gmail.com</td>
+				<td>
+					<div class="td-role">
+						<div class="td-role-top">
+							<div class="role">
+								<div id="roleUser" th:text="${u.roleName}">USER</div>
+								<a href="#!" onclick="roleOption(this)"> &nbsp; <i
+									class="fa-solid fa-caret-down"></i>
+								</a>
+							</div>
+							<div class="role-option">
+								<div class="role-user">
+									<a href="#!" th:onclick="'changeRoleTmp(this, \'ROLE_USER\', \'' + ${u.id} + '\')'">ROLE_USER</a>
+								</div>
+								<div class="role-admin">
+									<a href="#!" th:onclick="'changeRoleTmp(this, \'ROLE_ADMIN\', \'' + ${u.id} + '\')'">ROLE_ADMIN</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td><a class="btn" href="#!" th:onclick="'confirmRole(this,'+${u.id}+')'"> <i
+						class="fa-solid fa-pen-to-square"></i>
+				</a></td>
+			</tr>
+
+		</tbody>
+		<tfoot>
+		</tfoot>
+	</table>
+
+</div>
+
+<div class="user-modal" id="user-modal">
+	<div class="user-modal-content">
+		<div class="modal-content-title">
+			<div class="shz-header-title">Cập nhật quyền người dùng</div>
+			<div class="modal-content-message">Đổi quyền cho user: A =>
+				ADMIN?</div>
+		</div>
+		<div class="modal-content-action">
+			<div class="action-confirm">
+				<a href="" class="btn" onclick="confirmChangeRole(this)">Xác nhận</a>
+			</div>
+			<div class="action-cancel">
+				<a href="#!" class="btn btn-cancel" onclick="closeUserModal()">Hủy</a>
+			</div>
+		</div>
+		<div class="modal-close">
+			<a href="#!" onclick="closeUserModal()">X</a>
+		</div>
+	</div>
+</div>
+<div class="user-modal-add" id="user-modal-add">
+
+	<div class="modal-add-content">
+		<div class="shz-header-title">Thêm người dùng</div>
+		<div class="modal-group">
+			<form th:action="@{/admin/users/add}" method="post">
+				<div class="model-row">
+					<h5>TÊN NGƯỜI DÙNG</h5>
+					<input type="text" name="username" id="userName">
+				</div>
+				<div class="model-row">
+					<h5>EMAIL/ SỐ ĐIỆN THOẠI</h5>
+					<input type="email" name="email" id="email">
+				</div>
+				<div class="model-row">
+					<h5>MẬT KHẨU</h5>
+					<input type="password" name="passwords" id="passwords">
+				</div>
+				<div class="model-row">
+					<div>
+						<h5>QUYỀN</h5>
+						<select name="role" id="role">
+							<option value="ROLE_USER">USER</option>
+							<option value="ROLE_ADMIN">ADMIN</option>
+						</select>
+					</div>
+					<div>
+						<input type="submit" onclick="checkNewUser(this)" class="btn" value="THÊM" name="" id="">&nbsp;
+						<input type="reset" class="btn" value="NHẬP LẠI" name="" id="">
+					</div>
+				</div>
+			</form>
+			<div class="modal-close" style="position: absolute; top:0; right:0; padding: 10px;">
+				<a href="#!" onclick="closeUserModal()">X</a>
+			</div>
+		</div>
+	</div>
+</div>

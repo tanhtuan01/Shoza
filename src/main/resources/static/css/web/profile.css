@@ -1,0 +1,50 @@
+.profile-body{
+	display: flex;
+	padding: 20px;
+	background: white;
+}
+
+.pc-left{
+	width: 30%;
+	height:fit-content;
+	margin: 0 20px;
+}
+.pc-right{
+	width: 70%;
+}
+.pc-right p{
+	padding: 10px;
+}
+.pc-sc{
+	background:#7a7a7a;
+	color:white;
+}
+.pc-left ul li{
+	padding: 10px 20px;
+}
+
+.pc-right form .pc-row{
+	padding: 10px;
+}
+
+.pc-right form .pc-row input{
+	padding: 8px;
+	width: 60%;
+	border-radius: 3px;
+}
+.pc-right table{
+	width: 100%;
+}
+
+.pc-right table th{
+	text-align: left;
+}
+.pc-right table td, .pc-right table th{
+	padding: 10px;
+}
+
+.pc-right{
+	min-height: 500px;
+    max-height: 500px;
+    overflow-y: hidden;
+}
